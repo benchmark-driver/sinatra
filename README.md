@@ -14,6 +14,21 @@ $ bundle exec ruby app.rb
 $ ab -c 20 -t 10 http://localhost:4567/
 ```
 
+## In-process benchmark
+
+```
+$ bundle exec ruby rps.rb
+benchmark: 20000/20000
+7669.87 rps
+```
+
+```
+$ WARMUP=1000 REQUESTS=10000 bundle exec ruby rps.rb
+warmup: 1000/10000
+benchmark: 10000/10000
+7399.75 rps
+```
+
 ## License
 
 MIT License
