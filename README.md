@@ -178,6 +178,43 @@ benchmark: 20000/20000
 
 ```
 
+```
+$ sudo perf stat -e "task-clock,cycles,instructions,branches,branch-misses,cache-misses,cache-references,l1d_pend_miss.pending_cycles,l1d_pend_miss.pending_cycles_any,l2_rqsts.all_code_rd,l2_rqsts.code_rd_hit,dsb2mite_switches.penalty_cycles,icache.hit,icache.ifdata_stall,icache.ifetch_stall,icache.misses,idq.all_dsb_cycles_4_uops,idq.all_dsb_cycles_any_uops,idq.all_mite_cycles_4_uops,idq.all_mite_cycles_any_uops,idq.dsb_cycles,idq.dsb_uops,l2_rqsts.code_rd_hit,l2_rqsts.code_rd_miss" ~/.rbenv/versions/2.5.3/bin/ruby bench.rb
+/home/k0kubun/src/github.com/benchmark-driver/sinatra † bionic status: 0                                                      (git)-[master]-
+$ sudo perf stat -e "task-clock,cycles,instructions,branches,branch-misses,cache-misses,cache-references,l1d_pend_miss.pending_cycles,l1d_pend_miss.pending_cycles_any,l2_rqsts.all_code_rd,l2_rqsts.code_rd_hit,dsb2mite_switches.penalty_cycles,icache.hit,icache.ifdata_stall,icache.ifetch_stall,icache.misses,idq.all_dsb_cycles_4_uops,idq.all_dsb_cycles_any_uops,idq.all_mite_cycles_4_uops,idq.all_mite_cycles_any_uops,idq.dsb_cycles,idq.dsb_uops,l2_rqsts.code_rd_hit,l2_rqsts.code_rd_miss" ~/.rbenv/versions/2.5.3/bin/ruby bench.rb
+benchmark: 20000/20000
+7840.97 rps
+
+ Performance counter stats for '/home/k0kubun/.rbenv/versions/2.5.3/bin/ruby bench.rb':
+
+       2733.480713      task-clock (msec)         #    1.000 CPUs utilized
+    11,328,790,975      cycles                    #    4.144 GHz                      (17.09%)
+    10,662,694,703      instructions              #    0.94  insn per cycle           (21.48%)
+     2,202,730,508      branches                  #  805.834 M/sec                    (21.63%)
+       100,814,668      branch-misses             #    4.58% of all branches          (21.77%)
+         1,905,366      cache-misses              #    0.581 % of all cache refs      (21.92%)
+       327,912,740      cache-references          #  119.962 M/sec                    (21.95%)
+     3,487,791,653      l1d_pend_miss.pending_cycles # 1275.953 M/sec                    (17.56%)
+     3,864,622,516      l1d_pend_miss.pending_cycles_any # 1413.810 M/sec                    (4.39%)
+       393,426,598      l2_rqsts.all_code_rd      #  143.929 M/sec                    (8.78%)
+       230,937,291      l2_rqsts.code_rd_hit      #   84.485 M/sec                    (13.17%)
+       268,477,569      dsb2mite_switches.penalty_cycles #   98.218 M/sec                    (17.56%)
+     5,352,277,133      icache.hit                # 1958.045 M/sec                    (17.56%)
+     1,517,179,003      icache.ifdata_stall       #  555.036 M/sec                    (17.56%)
+     1,517,529,272      icache.ifetch_stall       #  555.164 M/sec                    (17.56%)
+       175,292,670      icache.misses             #   64.128 M/sec                    (17.56%)
+     1,264,946,390      idq.all_dsb_cycles_4_uops #  462.760 M/sec                    (17.56%)
+     2,024,031,175      idq.all_dsb_cycles_any_uops #  740.459 M/sec                    (17.50%)
+       978,038,666      idq.all_mite_cycles_4_uops #  357.800 M/sec                    (17.36%)
+     3,833,411,863      idq.all_mite_cycles_any_uops # 1402.392 M/sec                    (17.21%)
+     2,009,816,295      idq.dsb_cycles            #  735.259 M/sec                    (17.06%)
+     6,576,325,463      idq.dsb_uops              # 2405.843 M/sec                    (16.97%)
+       233,375,648      l2_rqsts.code_rd_hit      #   85.377 M/sec                    (16.97%)
+       164,551,592      l2_rqsts.code_rd_miss     #   60.199 M/sec                    (16.97%)
+
+       2.733761589 seconds time elapsed
+```
+
 ## License
 
 MIT License
