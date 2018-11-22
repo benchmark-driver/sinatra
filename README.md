@@ -113,6 +113,51 @@ $ stackprof stackprof.dump
      10237   (1.1%)       10237   (1.1%)     Rack::Utils::HeaderHash#names
 ```
 
+## Perf
+
+```
+$ sudo perf record -c 10000 ~/.rbenv/versions/2.5.3/bin/ruby bench.rb
+benchmark: 20000/20000
+7036.72 rps
+[ perf record: Woken up 19 times to write data ]
+[ perf record: Captured and wrote 4.605 MB perf.data (148041 samples) ]
+
+$ sudo perf report
+Samples: 148K of event 'cycles:ppp', Event count (approx.): 1480410000
+Overhead  Command         Shared Object       Symbol
+  17.65%  ruby            ruby                [.] vm_exec_core
+   3.73%  ruby            ruby                [.] vm_call_cfunc
+   3.37%  ruby            ruby                [.] vm_search_method.isra.110
+   3.06%  ruby            ruby                [.] st_lookup
+   2.37%  ruby            ruby                [.] gc_sweep_step
+   1.90%  ruby            ruby                [.] method_entry_get
+   1.82%  ruby            ruby                [.] vm_call_iseq_setup
+   1.77%  ruby            libc-2.27.so        [.] _int_malloc
+   1.51%  ruby            libc-2.27.so        [.] __malloc_usable_size
+   1.50%  ruby            ruby                [.] rb_memhash
+   1.46%  ruby            libc-2.27.so        [.] cfree@GLIBC_2.2.5
+   1.33%  ruby            libc-2.27.so        [.] malloc
+   1.19%  ruby            ruby                [.] vm_call_iseq_setup_normal_0start_0params_0locals
+   1.10%  ruby            ruby                [.] objspace_malloc_increase.isra.75
+   1.10%  ruby            ruby                [.] rb_class_of
+   0.99%  ruby            ruby                [.] setup_parameters_complex
+   0.92%  ruby            ruby                [.] rb_id_table_lookup
+   0.92%  ruby            ruby                [.] rb_enc_get
+   0.90%  ruby            ruby                [.] match_at
+   0.87%  ruby            ruby                [.] invoke_iseq_block_from_c
+   0.82%  ruby            ruby                [.] st_update
+   0.76%  ruby            ruby                [.] rb_wb_protected_newobj_of
+   0.76%  ruby            ruby                [.] rb_call0
+   0.75%  ruby            ruby                [.] vm_call_iseq_setup_normal_0start_1params_1locals
+   0.74%  ruby            ruby                [.] vm_exec
+   0.66%  ruby            ruby                [.] vm_call_method_each_type
+   0.66%  ruby            ruby                [.] vm_call0_body.constprop.148
+   0.63%  ruby            libc-2.27.so        [.] malloc_consolidate
+   0.59%  ruby            ruby                [.] prepare_callable_method_entry
+   0.53%  ruby            ruby                [.] BSD_vfprintf
+   0.51%  ruby            ruby                [.] rb_str_format
+```
+
 ## License
 
 MIT License
