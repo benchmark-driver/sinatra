@@ -158,6 +158,26 @@ Overhead  Command         Shared Object       Symbol
    0.51%  ruby            ruby                [.] rb_str_format
 ```
 
+```
+$ sudo perf stat ~/.rbenv/versions/2.5.3/bin/ruby bench.rb
+benchmark: 20000/20000
+7905.35 rps
+
+ Performance counter stats for '/home/k0kubun/.rbenv/versions/2.5.3/bin/ruby bench.rb':
+
+       2717.813924      task-clock (msec)         #    1.000 CPUs utilized
+                91      context-switches          #    0.033 K/sec
+                 1      cpu-migrations            #    0.000 K/sec
+             3,299      page-faults               #    0.001 M/sec
+    11,278,083,872      cycles                    #    4.150 GHz
+    10,615,806,238      instructions              #    0.94  insn per cycle
+     2,186,780,879      branches                  #  804.610 M/sec
+        98,175,739      branch-misses             #    4.49% of all branches
+
+       2.719011304 seconds time elapsed
+
+```
+
 ## License
 
 MIT License
