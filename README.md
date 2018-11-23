@@ -217,6 +217,23 @@ benchmark: 20000/20000
 
 ```
 
+## benchmark-driver
+
+```
+$ benchmark-driver driver.yml --rbenv '2.6.0::ruby;2.6.0+JIT::ruby --jit-max-cache=50;jruby-9.2.4.0;jruby-9.2.4.0+indy::jruby-9.2.4.0 -Xcompile.invokedynamic=true;truffleruby-1.0.0-rc9'
+Calculating -------------------------------------
+                          2.6.0   2.6.0+JIT  jruby-9.2.4.0  jruby-9.2.4.0+indy  truffleruby-1.0.0-rc9
+             sinatra    11.743k     10.401k         8.637k             14.383k                22.636k i/s -    100.000k times in 8.516033s 9.614323s 11.578544s 6.952782s 4.417795s
+
+Comparison:
+                           sinatra
+truffleruby-1.0.0-rc9:     22635.7 i/s
+   jruby-9.2.4.0+indy:     14382.7 i/s - 1.57x  slower
+                2.6.0:     11742.6 i/s - 1.93x  slower
+            2.6.0+JIT:     10401.1 i/s - 2.18x  slower
+        jruby-9.2.4.0:      8636.7 i/s - 2.62x  slower
+```
+
 ## License
 
 MIT License

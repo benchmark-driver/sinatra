@@ -1,0 +1,22 @@
+prelude: |
+  require 'sinatra/base'
+
+  class App < Sinatra::Base
+    get '/' do
+      'apples, oranges & bananas'
+    end
+  end
+
+  app = Rack::MockRequest.new(App)
+  path = '/'
+
+  i = 0
+  while i < 100000
+    app.get(path)
+    i += 1
+  end
+
+benchmark:
+  sinatra: app.get(path)
+
+loop_count: 100000
