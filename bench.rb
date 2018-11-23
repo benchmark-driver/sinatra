@@ -11,7 +11,7 @@ if warmup > 0
   i = 1
   while i <= warmup
     app.get(path)
-    print "warmup: #{i}/#{requests}\r"
+    print "warmup: #{i}/#{warmup}\r"
     i += 1
   end
   puts
