@@ -220,7 +220,12 @@ benchmark: 20000/20000
 ## benchmark-driver
 
 ```
-$ benchmark-driver driver.yml --rbenv '2.6.0::ruby;2.6.0+JIT::ruby --jit-max-cache=50;jruby-9.2.4.0;jruby-9.2.4.0+indy::jruby-9.2.4.0 -Xcompile.invokedynamic=true;truffleruby-1.0.0-rc9'
+$ benchmark-driver driver.yml --rbenv '2.6.0::ruby;2.6.0+JIT::ruby --jit-max-cache=50;jruby-9.2.4.0;jruby-9.2.4.0+indy::jruby-9.2.4.0 -Xcompile.invokedynamic=true;truffleruby-1.0.0-rc9' -v
+2.6.0: ruby 2.6.0dev (2018-11-23 trunk 65931) [x86_64-linux]
+2.6.0+JIT: ruby 2.6.0dev (2018-11-23 trunk 65931) +JIT [x86_64-linux]
+jruby-9.2.4.0: jruby 9.2.4.0 (2.5.0) 2018-11-13 8faff06 Java HotSpot(TM) 64-Bit Server VM 10.0.2+13 on 10.0.2+13 +jit [linux-x86_64]
+jruby-9.2.4.0+indy: jruby 9.2.4.0 (2.5.0) 2018-11-13 8faff06 Java HotSpot(TM) 64-Bit Server VM 10.0.2+13 on 10.0.2+13 +indy +jit [linux-x86_64]
+truffleruby-1.0.0-rc9: truffleruby 1.0.0-rc9, like ruby 2.4.4, GraalVM CE Native [x86_64-linux]
 Calculating -------------------------------------
                           2.6.0   2.6.0+JIT  jruby-9.2.4.0  jruby-9.2.4.0+indy  truffleruby-1.0.0-rc9
              sinatra    11.743k     10.401k         8.637k             14.383k                22.636k i/s -    100.000k times in 8.516033s 9.614323s 11.578544s 6.952782s 4.417795s
