@@ -30,7 +30,7 @@ GEM
       tilt (~> 2.0)
     spoon (0.0.6)
       ffi
-    stackprof (0.2.13)
+    stackprof (0.2.15)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
