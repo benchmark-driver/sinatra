@@ -16,7 +16,7 @@ $ ab -c 20 -t 10 http://localhost:4567/
 
 ## In-process benchmark
 
-```
+```bash
 $ bundle exec ruby bench.rb
 benchmark: 20000/20000
 13089.20 rps
