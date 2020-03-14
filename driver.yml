@@ -15,6 +15,9 @@ prelude: |
     app.call(env.dup)
     i += 1
   end
+  if defined?(RubyVM::MJIT) && RubyVM::MJIT.enabled?
+    RubyVM::MJIT.pause
+  end
 
 benchmark:
   sinatra: app.call(env.dup)
