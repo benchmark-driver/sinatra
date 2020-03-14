@@ -19,14 +19,21 @@ $ ab -c 20 -t 10 http://localhost:4567/
 ```
 $ bundle exec ruby bench.rb
 benchmark: 20000/20000
-11729.13 rps
+13089.20 rps
+
+# WARMUP=0 has no meaning for --jit
 ```
 
 ```
-$ WARMUP=1000 REQUESTS=10000 bundle exec ruby bench.rb
-warmup: 1000/1000
-benchmark: 10000/10000
-12513.68 rps
+$ WARMUP=20000 REQUESTS=20000 bundle exec ruby bench.rb
+warmup: 20000/20000
+benchmark: 20000/20000
+12988.64 rps
+
+$ WARMUP=20000 REQUESTS=20000 bundle exec ruby --jit bench.rb
+warmup: 20000/20000
+benchmark: 20000/20000
+11602.35 rps
 ```
 
 ## Stackprof
