@@ -19,14 +19,14 @@ $ ab -c 20 -t 10 http://localhost:4567/
 ```
 $ bundle exec ruby bench.rb
 benchmark: 20000/20000
-7669.87 rps
+11729.13 rps
 ```
 
 ```
 $ WARMUP=1000 REQUESTS=10000 bundle exec ruby bench.rb
-warmup: 1000/10000
+warmup: 1000/1000
 benchmark: 10000/10000
-7399.75 rps
+12513.68 rps
 ```
 
 ## Profiling
