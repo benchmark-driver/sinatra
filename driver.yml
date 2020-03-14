@@ -7,16 +7,16 @@ prelude: |
     end
   end
 
-  app = Rack::MockRequest.new(App)
-  path = '/'
+  app = App
+  env = Rack::MockRequest.env_for('/', { method: Rack::GET })
 
   i = 0
   while i < 100000
-    app.get(path)
+    app.call(env.dup)
     i += 1
   end
 
 benchmark:
-  sinatra: app.get(path)
+  sinatra: app.get(env.dup)
 
 loop_count: 100000
