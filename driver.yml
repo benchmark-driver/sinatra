@@ -17,6 +17,6 @@ prelude: |
   end
 
 benchmark:
-  sinatra: app.get(env.dup)
+  sinatra: app.call(env.dup)
 
 loop_count: 100000
