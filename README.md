@@ -220,23 +220,23 @@ benchmark: 20000/20000
 ## benchmark-driver
 
 ```
-$ benchmark-driver driver.yml --rbenv '2.6.0::ruby;2.6.0+JIT::ruby --jit-max-cache=50;jruby-9.2.4.0;jruby-9.2.4.0+indy::jruby-9.2.4.0 -Xcompile.invokedynamic=true;truffleruby-1.0.0-rc9' -v
-2.6.0: ruby 2.6.0dev (2018-11-23 trunk 65931) [x86_64-linux]
-2.6.0+JIT: ruby 2.6.0dev (2018-11-23 trunk 65931) +JIT [x86_64-linux]
-jruby-9.2.4.0: jruby 9.2.4.0 (2.5.0) 2018-11-13 8faff06 Java HotSpot(TM) 64-Bit Server VM 10.0.2+13 on 10.0.2+13 +jit [linux-x86_64]
-jruby-9.2.4.0+indy: jruby 9.2.4.0 (2.5.0) 2018-11-13 8faff06 Java HotSpot(TM) 64-Bit Server VM 10.0.2+13 on 10.0.2+13 +indy +jit [linux-x86_64]
-truffleruby-1.0.0-rc9: truffleruby 1.0.0-rc9, like ruby 2.4.4, GraalVM CE Native [x86_64-linux]
+$ benchmark-driver driver.yml --rbenv 'ruby;ruby+jit::ruby --jit;jruby-9.2.11.0;jruby-9.2.11.0+indy::jruby-9.2.11.0 -Xcompile.invokedynamic=true;truffleruby-20.0.0' -v
+ruby: ruby 2.8.0dev (2020-03-14T09:17:17Z mjit-optcarrot-com.. 666194559f) [x86_64-linux]
+ruby+jit: ruby 2.8.0dev (2020-03-14T09:17:17Z mjit-optcarrot-com.. 666194559f) +JIT [x86_64-linux]
+jruby-9.2.11.0: jruby 9.2.11.0 (2.5.7) 2020-03-02 612d7a05a6 Java HotSpot(TM) 64-Bit Server VM 25.211-b12 on 1.8.0_211-b12 +jit [linux-x86_64]
+jruby-9.2.11.0+indy: jruby 9.2.11.0 (2.5.7) 2020-03-02 612d7a05a6 Java HotSpot(TM) 64-Bit Server VM 25.211-b12 on 1.8.0_211-b12 +indy +jit [linux-x86_64]
+truffleruby-20.0.0: truffleruby 20.0.0, like ruby 2.6.5, GraalVM CE Native [x86_64-linux]
 Calculating -------------------------------------
-                          2.6.0   2.6.0+JIT  jruby-9.2.4.0  jruby-9.2.4.0+indy  truffleruby-1.0.0-rc9
-             sinatra    11.743k     10.401k         8.637k             14.383k                22.636k i/s -    100.000k times in 8.516033s 9.614323s 11.578544s 6.952782s 4.417795s
+                           ruby    ruby+jit  jruby-9.2.11.0  jruby-9.2.11.0+indy  truffleruby-20.0.0
+             sinatra    15.532k     13.889k         13.510k              17.720k             22.081k i/s -    100.000k times in 6.438121s 7.200001s 7.401869s 5.643458s 4.528695s
 
 Comparison:
-                           sinatra
-truffleruby-1.0.0-rc9:     22635.7 i/s
-   jruby-9.2.4.0+indy:     14382.7 i/s - 1.57x  slower
-                2.6.0:     11742.6 i/s - 1.93x  slower
-            2.6.0+JIT:     10401.1 i/s - 2.18x  slower
-        jruby-9.2.4.0:      8636.7 i/s - 2.62x  slower
+                          sinatra
+  truffleruby-20.0.0:     22081.4 i/s
+ jruby-9.2.11.0+indy:     17719.6 i/s - 1.25x  slower
+                ruby:     15532.5 i/s - 1.42x  slower
+            ruby+jit:     13888.9 i/s - 1.59x  slower
+      jruby-9.2.11.0:     13510.1 i/s - 1.63x  slower
 ```
 
 ## License
