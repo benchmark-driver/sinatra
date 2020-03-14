@@ -3,14 +3,14 @@ require_relative 'app'
 warmup = Integer(ENV.fetch('WARMUP', '0'))
 requests = Integer(ENV.fetch('REQUESTS', '20000'))
 
-app = Rack::MockRequest.new(Sinatra::Application)
-path = '/'
+app = Sinatra::Application
+env = Rack::MockRequest.env_for('/', { method: Rack::GET })
 
 # warmup
 if warmup > 0
   i = 1
   while i <= warmup
-    app.get(path)
+    app.call(env.dup)
     print "warmup: #{i}/#{warmup}\r"
     i += 1
   end
@@ -28,8 +28,9 @@ end
 i = 1
 time = 0.0
 while i <= requests
+  env = env.dup
   before = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  app.get(path)
+  app.call(env)
   after = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
   time += after - before
