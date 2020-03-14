@@ -17,7 +17,7 @@ if warmup > 0
   puts
 end
 
-if RubyVM::MJIT.enabled?
+if defined?(RubyVM::MJIT) && RubyVM::MJIT.enabled?
   RubyVM::MJIT.pause
 end
 
