@@ -39,7 +39,7 @@ benchmark: 20000/20000
 11602.35 rps
 ```
 
-## Stackprof
+## StackProf
 ### cpu
 
 ```
