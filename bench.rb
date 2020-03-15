@@ -23,9 +23,8 @@ end
 
 # benchmark
 if use_perf = ENV.key?('PERF')
-  # pid = Process.spawn('perf', 'record', '-p', Process.pid.to_s, '-e', 'icache.misses', '-c', '100')
-  # pid = Process.spawn('perf', 'record', '-p', Process.pid.to_s, '-g', '-c', '3500')
-  pid = Process.spawn('perf', 'stat', '-p', Process.pid.to_s, '-e', 'task-clock,cycles,instructions,branches,branch-misses,cache-misses,cache-references,l1d_pend_miss.pending_cycles,l1d_pend_miss.pending_cycles_any,l2_rqsts.all_code_rd,l2_rqsts.code_rd_hit,dsb2mite_switches.penalty_cycles,icache.hit,icache.ifdata_stall,icache.ifetch_stall,icache.misses,idq.all_dsb_cycles_4_uops,idq.all_dsb_cycles_any_uops,idq.all_mite_cycles_4_uops,idq.all_mite_cycles_any_uops,idq.dsb_cycles,idq.dsb_uops,l2_rqsts.code_rd_hit,l2_rqsts.code_rd_miss')
+  require 'shellwords'
+  pid = Process.spawn('perf', *ENV['PERF'].shellsplit, '-p', Process.pid.to_s)
 end
 i = 1
 time = 0.0

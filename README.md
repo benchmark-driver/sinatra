@@ -17,7 +17,8 @@ $ ab -c 20 -t 10 http://localhost:4567/
 ## In-process benchmark
 
 ```bash
-$ bundle exec ruby bench.rb
+$ bundle exec ruby -v bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
 benchmark: 20000/20000
 13089.20 rps
 
@@ -25,12 +26,14 @@ benchmark: 20000/20000
 ```
 
 ```
-$ WARMUP=20000 REQUESTS=20000 bundle exec ruby bench.rb
+$ WARMUP=20000 REQUESTS=20000 bundle exec ruby -v bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
 warmup: 20000/20000
 benchmark: 20000/20000
 12988.64 rps
 
-$ WARMUP=20000 REQUESTS=20000 bundle exec ruby --jit bench.rb
+$ WARMUP=20000 REQUESTS=20000 bundle exec ruby -v --jit bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
 warmup: 20000/20000
 benchmark: 20000/20000
 11602.35 rps
@@ -40,7 +43,8 @@ benchmark: 20000/20000
 ### cpu
 
 ```
-$ bundle exec ruby profile.rb
+$ bundle exec ruby -v profile.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
 $ stackprof stackprof.dump
 ==================================
   Mode: cpu(1)
@@ -79,7 +83,8 @@ $ stackprof stackprof.dump
         22   (1.2%)          22   (1.2%)     (marking)
         33   (1.8%)          21   (1.1%)     Rack::Response#initialize
 
-$ bundle exec ruby --jit profile.rb
+$ bundle exec ruby -v --jit profile.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
 $ stackprof stackprof.dump
 ==================================
   Mode: cpu(1)
@@ -121,7 +126,8 @@ $ stackprof stackprof.dump
 
 ### wall
 ```
-$ MODE=wall INTERVAL=10 bundle exec ruby profile.rb
+$ MODE=wall INTERVAL=10 bundle exec ruby -v profile.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
 $ stackprof stackprof.dump
 ==================================
   Mode: wall(10)
@@ -160,7 +166,8 @@ $ stackprof stackprof.dump
      19742   (1.6%)       11714   (0.9%)     Sinatra::Base#error_block!
      20041   (1.6%)       11655   (0.9%)     Rack::Utils::HeaderHash.[]
 
-$ MODE=wall INTERVAL=10 bundle exec ruby --jit profile.rb
+$ MODE=wall INTERVAL=10 bundle exec ruby -v --jit profile.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
 $ stackprof stackprof.dump
 ==================================
   Mode: wall(10)
@@ -204,107 +211,177 @@ $ stackprof stackprof.dump
 ### report
 
 ```
-$ sudo perf record -c 10000 ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
-ruby 2.6.0dev (2018-11-22 trunk 65928) [x86_64-linux]
+$ PERF="record -c 10000" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
+warmup: 20000/20000
 benchmark: 20000/20000
-7351.28 rps
-[ perf record: Woken up 18 times to write data ]
-[ perf record: Captured and wrote 4.453 MB perf.data (142591 samples) ]
+[ perf record: Woken up 10 times to write data ]
+[ perf record: Captured and wrote 2.442 MB perf.data (78226 samples) ]
+11761.22 rps
 
 $ sudo perf report
-Samples: 142K of event 'cycles:ppp', Event count (approx.): 1425910000
+Samples: 78K of event 'cycles:ppp', Event count (approx.): 782260000
 Overhead  Command  Shared Object       Symbol
-  20.03%  ruby     ruby                [.] vm_exec_core
-   4.10%  ruby     ruby                [.] vm_call_cfunc
-   2.41%  ruby     ruby                [.] st_lookup
-   2.28%  ruby     ruby                [.] gc_sweep_step
-   1.98%  ruby     ruby                [.] method_entry_get
-   1.94%  ruby     ruby                [.] vm_call_iseq_setup
-   1.94%  ruby     libc-2.27.so        [.] _int_malloc
-   1.57%  ruby     ruby                [.] rb_memhash
-   1.32%  ruby     ruby                [.] vm_call_iseq_setup_normal_0start_0params_0locals
-   1.31%  ruby     ruby                [.] rb_class_of
-   1.05%  ruby     ruby                [.] setup_parameters_complex
-   1.02%  ruby     ruby                [.] rb_wb_protected_newobj_of
-   0.99%  ruby     ruby                [.] rb_enc_get
-   0.93%  ruby     libc-2.27.so        [.] cfree@GLIBC_2.2.5
-   0.89%  ruby     ruby                [.] match_at
-   0.87%  ruby     ruby                [.] vm_call_iseq_setup_normal_0start_1params_1locals
-   0.82%  ruby     libc-2.27.so        [.] malloc
-   0.79%  ruby     ruby                [.] rb_vm_exec
-   0.69%  ruby     ruby                [.] find_entry
-   0.68%  ruby     ruby                [.] vm_call0_body.constprop.403
-   0.63%  ruby     libc-2.27.so        [.] malloc_consolidate
-   0.62%  ruby     ruby                [.] ruby_yyparse
-   0.62%  ruby     ruby                [.] st_update
-   0.60%  ruby     ruby                [.] objspace_malloc_increase.isra.74
-   0.58%  ruby     ruby                [.] vm_call_method_each_type
-   0.56%  ruby     ruby                [.] rb_enc_mbclen
-   0.56%  ruby     libc-2.27.so        [.] __malloc_usable_size
-   0.54%  ruby     ruby                [.] vm_call_ivar
-   0.54%  ruby     ruby                [.] BSD_vfprintf
-   0.54%  ruby     ruby                [.] prepare_callable_method_entry
-   0.53%  ruby     ruby                [.] rb_hash_aref
+  20.17%  ruby     ruby                [.] vm_exec_core
+   4.70%  ruby     ruby                [.] vm_call_cfunc
+   2.81%  ruby     ruby                [.] rb_id_table_lookup
+   2.38%  ruby     ruby                [.] gc_sweep_step
+   1.88%  ruby     ruby                [.] rb_memhash
+   1.78%  ruby     ruby                [.] rb_st_lookup
+   1.63%  ruby     ruby                [.] CALLER_SETUP_ARG
+   1.57%  ruby     ruby                [.] rb_class_of
+   1.49%  ruby     ruby                [.] vm_call_iseq_setup_normal_0start_0params_0locals
+   1.39%  ruby     ruby                [.] rb_vm_search_method_slowpath
+   1.18%  ruby     ruby                [.] vm_call_iseq_setup_normal_0start_1params_1locals
+   1.13%  ruby     libc-2.27.so        [.] _int_malloc
+   1.12%  ruby     ruby                [.] callable_method_entry.constprop.440
+   1.03%  ruby     ruby                [.] rb_wb_protected_newobj_of
+   0.99%  ruby     ruby                [.] rb_vm_exec
+   0.99%  ruby     ruby                [.] vm_call_iseq_setup
+   0.97%  ruby     libc-2.27.so        [.] cfree@GLIBC_2.2.5
+   0.92%  ruby     ruby                [.] rb_enc_get
+   0.84%  ruby     ruby                [.] rb_enc_mbclen
+   0.78%  ruby     libc-2.27.so        [.] malloc
+   0.74%  ruby     ruby                [.] rb_vm_call0
+   0.74%  ruby     ruby                [.] match_at
+   0.68%  ruby     ruby                [.] vm_call_ivar
+   0.61%  ruby     ruby                [.] rb_file_expand_path_internal
+   0.61%  ruby     ruby                [.] vm_call_iseq_setup_normal_opt_start
+   0.56%  ruby     ruby                [.] rb_obj_is_kind_of
+   0.55%  ruby     libc-2.27.so        [.] __malloc_usable_size
+   0.54%  ruby     ruby                [.] vm_setivar
+   0.53%  ruby     ruby                [.] rb_enc_set_index
+   0.52%  ruby     ruby                [.] vm_search_super_method
+   0.51%  ruby     ruby                [.] vm_call_iseq_setup_normal_0start_1params_2locals
+   0.49%  ruby     ruby                [.] method_entry_resolve_refinement
+
+
+$ PERF="record -c 10000" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v --jit-debug=-g1 --jit-save-temps bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
+warmup: 20000/20000
+benchmark: 20000/20000
+[ perf record: Woken up 13 times to write data ]
+[ perf record: Captured and wrote 3.082 MB perf.data (98476 samples) ]
+10052.47 rps
+
+$ sudo perf report
+Samples: 98K of event 'cycles:ppp', Event count (approx.): 984760000
+Overhead  Command  Shared Object            Symbol
+   7.82%  ruby     ruby                     [.] vm_exec_core
+   4.57%  ruby     ruby                     [.] vm_call_cfunc
+   3.10%  ruby     ruby                     [.] rb_id_table_lookup
+   2.22%  ruby     ruby                     [.] gc_sweep_step
+   1.70%  ruby     ruby                     [.] rb_st_lookup
+   1.66%  ruby     ruby                     [.] rb_memhash
+   1.55%  ruby     ruby                     [.] rb_vm_exec
+   1.45%  ruby     ruby                     [.] CALLER_SETUP_ARG
+   1.30%  ruby     ruby                     [.] rb_vm_search_method_slowpath
+   1.05%  ruby     ruby                     [.] callable_method_entry.constprop.440
+   1.02%  ruby     ruby                     [.] rb_wb_protected_newobj_of
+   1.00%  ruby     libc-2.27.so             [.] _int_malloc
+   0.92%  ruby     libc-2.27.so             [.] cfree@GLIBC_2.2.5
+   0.85%  ruby     ruby                     [.] rb_enc_get
+   0.84%  ruby     libc-2.27.so             [.] malloc
+   0.83%  ruby     ruby                     [.] vm_call_iseq_setup
+   0.72%  ruby     ruby                     [.] rb_enc_mbclen
+   0.71%  ruby     ruby                     [.] vm_call_iseq_setup_normal_0start_0params_0locals
+   0.67%  ruby     ruby                     [.] rb_vm_call0
+   0.66%  ruby     ruby                     [.] vm_call_ivar
+   0.65%  ruby     ruby                     [.] rb_obj_is_kind_of
+   0.61%  ruby     ruby                     [.] rb_class_of
+   0.61%  ruby     ruby                     [.] match_at
+   0.56%  ruby     ruby                     [.] rb_file_expand_path_internal
+   0.56%  ruby     ruby                     [.] vm_call_iseq_setup_normal_opt_start
+   0.54%  ruby     ruby                     [.] rb_hash_aref
+   0.53%  ruby     libc-2.27.so             [.] __malloc_usable_size
+   0.52%  ruby     ruby                     [.] vm_yield_setup_args
+   0.50%  ruby     ruby                     [.] method_entry_resolve_refinement
+   0.49%  ruby     libc-2.27.so             [.] malloc_consolidate
+   0.49%  ruby     ruby                     [.] rb_enc_set_index
+   0.46%  ruby     ruby                     [.] setup_parameters_complex
+```
+
+### report (call graph)
+
+```
+$ PERF="record -c 10000 --call-graph dwarf" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
+warmup: 20000/20000
+benchmark: 20000/20000
+[ perf record: Woken up 893 times to write data ]
+Warning:
+Processed 110944 events and lost 6 chunks!
+
+Check IO/CPU overload!
+
+[ perf record: Captured and wrote 700.012 MB perf.data (87068 samples) ]
+11361.62 rps
+
+$ sudo perf report -i perf.data.old
+
+
+
+$ PERF="record -c 10000 --call-graph dwarf" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v --jit-debug=-g1 --jit-save-temps bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
+warmup: 20000/20000
+benchmark: 20000/20000
+[ perf record: Woken up 1059 times to write data ]
+Warning:
+Processed 134988 events and lost 11 chunks!
+
+Check IO/CPU overload!
+
+[ perf record: Captured and wrote 830.695 MB perf.data (103282 samples) ]
+9730.67 rps
+
+$ sudo perf report
 ```
 
 ### stat
 ```
-$ sudo perf stat ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
-ruby 2.6.0dev (2018-11-22 trunk 65928) [x86_64-linux]
+$ PERF="stat" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
+warmup: 20000/20000
 benchmark: 20000/20000
-8167.81 rps
 
- Performance counter stats for '/home/k0kubun/.rbenv/versions/ruby/bin/ruby -v bench.rb':
+ Performance counter stats for process id '10211':
 
-       2640.596954      task-clock (msec)         #    1.000 CPUs utilized
-                43      context-switches          #    0.016 K/sec
+       1599.171103      task-clock (msec)         #    1.000 CPUs utilized
+                 5      context-switches          #    0.003 K/sec
+                 1      cpu-migrations            #    0.001 K/sec
+               236      page-faults               #    0.148 K/sec
+     6,703,825,122      cycles                    #    4.192 GHz
+     6,680,974,488      instructions              #    1.00  insn per cycle
+     1,342,705,221      branches                  #  839.626 M/sec
+        47,979,038      branch-misses             #    3.57% of all branches
+
+       1.599213438 seconds time elapsed
+
+12944.64 rps
+
+$ PERF="stat" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v --jit bench.rb
+ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
+warmup: 20000/20000
+benchmark: 20000/20000
+
+ Performance counter stats for process id '10288':
+
+       1807.683511      task-clock (msec)         #    0.999 CPUs utilized
+               107      context-switches          #    0.059 K/sec
                  0      cpu-migrations            #    0.000 K/sec
-             4,005      page-faults               #    0.002 M/sec
-    10,970,470,396      cycles                    #    4.155 GHz
-    10,886,137,530      instructions              #    0.99  insn per cycle
-     2,217,839,446      branches                  #  839.901 M/sec
-        93,942,940      branch-misses             #    4.24% of all branches
+               233      page-faults               #    0.129 K/sec
+     7,546,590,686      cycles                    #    4.175 GHz
+     6,617,652,235      instructions              #    0.88  insn per cycle
+     1,346,985,268      branches                  #  745.144 M/sec
+        42,223,775      branch-misses             #    3.13% of all branches
 
-       2.641235929 seconds time elapsed
+       1.808596976 seconds time elapsed
 
+11487.65 rps
 ```
 
 ### stat (more)
 ```
-$ sudo perf stat -e "task-clock,cycles,instructions,branches,branch-misses,cache-misses,cache-references,l1d_pend_miss.pending_cycles,l1d_pend_miss.pending_cycles_any,l2_rqsts.all_code_rd,l2_rqsts.code_rd_hit,dsb2mite_switches.penalty_cycles,icache.hit,icache.ifdata_stall,icache.ifetch_stall,icache.misses,idq.all_dsb_cycles_4_uops,idq.all_dsb_cycles_any_uops,idq.all_mite_cycles_4_uops,idq.all_mite_cycles_any_uops,idq.dsb_cycles,idq.dsb_uops,l2_rqsts.code_rd_hit,l2_rqsts.code_rd_miss" ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
-ruby 2.6.0dev (2018-11-22 trunk 65928) [x86_64-linux]
-benchmark: 20000/20000
-7682.00 rps
-
- Performance counter stats for '/home/k0kubun/.rbenv/versions/ruby/bin/ruby -v bench.rb':
-
-       2808.706787      task-clock (msec)         #    1.000 CPUs utilized
-    11,556,658,543      cycles                    #    4.115 GHz                      (17.19%)
-    11,010,674,914      instructions              #    0.95  insn per cycle           (21.60%)
-     2,255,839,653      branches                  #  803.160 M/sec                    (21.74%)
-        97,469,385      branch-misses             #    4.32% of all branches          (21.89%)
-         2,092,016      cache-misses              #    0.627 % of all cache refs      (22.03%)
-       333,919,915      cache-references          #  118.887 M/sec                    (22.07%)
-     3,430,040,847      l1d_pend_miss.pending_cycles # 1221.217 M/sec                    (17.66%)
-     3,803,438,804      l1d_pend_miss.pending_cycles_any # 1354.160 M/sec                    (4.41%)
-       452,630,394      l2_rqsts.all_code_rd      #  161.153 M/sec                    (8.83%)
-       272,212,616      l2_rqsts.code_rd_hit      #   96.917 M/sec                    (13.24%)
-       265,403,509      dsb2mite_switches.penalty_cycles #   94.493 M/sec                    (17.65%)
-     5,552,988,901      icache.hit                # 1977.063 M/sec                    (17.66%)
-     1,592,466,152      icache.ifdata_stall       #  566.975 M/sec                    (17.60%)
-     1,583,678,408      icache.ifetch_stall       #  563.846 M/sec                    (17.46%)
-       189,897,687      icache.misses             #   67.610 M/sec                    (17.31%)
-     1,122,898,168      idq.all_dsb_cycles_4_uops #  399.792 M/sec                    (17.17%)
-     1,921,014,743      idq.all_dsb_cycles_any_uops #  683.950 M/sec                    (17.09%)
-     1,043,781,103      idq.all_mite_cycles_4_uops #  371.623 M/sec                    (17.09%)
-     3,895,863,017      idq.all_mite_cycles_any_uops # 1387.066 M/sec                    (17.09%)
-     1,898,632,792      idq.dsb_cycles            #  675.981 M/sec                    (17.09%)
-     6,110,250,945      idq.dsb_uops              # 2175.468 M/sec                    (17.09%)
-       273,362,834      l2_rqsts.code_rd_hit      #   97.327 M/sec                    (17.09%)
-       177,740,813      l2_rqsts.code_rd_miss     #   63.282 M/sec                    (17.09%)
-
-       2.809407458 seconds time elapsed
-
 ```
 
 ## debug\_counter
