@@ -15,6 +15,9 @@ end
 
 if defined?(RubyVM::MJIT) && RubyVM::MJIT.enabled?
   RubyVM::MJIT.pause
+  app.call(env.dup) # issue recompile
+  RubyVM::MJIT.resume
+  RubyVM::MJIT.pause # finish recompile
 end
 
 StackProf.run(mode: ENV.fetch('MODE', 'cpu').to_sym, interval: Integer(ENV.fetch('INTERVAL', '1')), out: 'stackprof.dump') do
