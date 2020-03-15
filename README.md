@@ -305,103 +305,103 @@ Overhead  Command  Shared Object            Symbol
 
 ```
 $ PERF="record -c 10000 --call-graph dwarf" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
-ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) [x86_64-linux]
+ruby 2.8.0dev (2020-03-15T04:13:31Z master 67fbc122fb) [x86_64-linux]
 warmup: 20000/20000
 benchmark: 20000/20000
-[ perf record: Woken up 893 times to write data ]
+[ perf record: Woken up 839 times to write data ]
 Warning:
-Processed 110944 events and lost 6 chunks!
+Processed 108625 events and lost 26 chunks!
 
 Check IO/CPU overload!
 
-[ perf record: Captured and wrote 700.012 MB perf.data (87068 samples) ]
-11361.62 rps
+[ perf record: Captured and wrote 653.350 MB perf.data (81251 samples) ]
+11341.86 rps
 
 $ sudo perf report -i perf.data.old
-Samples: 87K of event 'cycles:ppp', Event count (approx.): 870680000
+Samples: 81K of event 'cycles:ppp', Event count (approx.): 812510000
   Children      Self  Command  Shared Object       Symbol
--   84.73%    20.35%  ruby     ruby                [.] vm_exec_core
-   - 64.39% vm_exec_core
-      - 59.36% vm_sendish (inlined)
-         - 52.73% vm_call_cfunc
-            - 52.27% vm_call_cfunc_with_frame (inlined)
-               + 24.46% rb_f_catch
+-   84.81%    20.41%  ruby     ruby                [.] vm_exec_core
+   - 64.42% vm_exec_core
+      - 59.29% vm_sendish (inlined)
+         - 52.71% vm_call_cfunc
+            - 52.17% vm_call_cfunc_with_frame (inlined)
+               + 24.38% rb_f_catch
                + 7.98% rb_class_s_new
-               + 3.30% rb_f_print
-               + 1.94% enum_find
-               + 1.88% rb_obj_dup
-               + 1.85% rb_str_aref_m
-               + 1.32% rb_ary_all_p
-               + 1.19% str_gsub
-               + 1.08% enum_collect
-                 1.05% rb_str_downcase
+               + 3.31% rb_f_print
+               + 1.98% rb_obj_dup
+               + 1.91% enum_find
+               + 1.88% rb_str_aref_m
+                 1.26% str_gsub
+               + 1.16% rb_ary_all_p
+                 1.15% rb_str_downcase
+               + 0.94% enum_collect
                  0.77% rb_str_split_m
-         + 1.50% vm_search_method_wrap (inlined)
-         - 1.40% vm_call_method
-            - vm_call_method_each_type
-               - 1.23% vm_call_cfunc
-                  - 1.16% vm_call_cfunc_with_frame (inlined)
-                     + 0.62% rb_hash_aset
+         + 1.48% vm_search_method_wrap (inlined)
+         - 1.32% vm_call_method
+            - 1.28% vm_call_method_each_type
+               - 1.20% vm_call_cfunc
+                  - 1.14% vm_call_cfunc_with_frame (inlined)
+                     + 0.63% rb_hash_aset
          + 0.64% vm_call_iseq_setup_normal_0start_1params_1locals
-         + 0.52% vm_call_iseq_setup_normal_0start_0params_0locals
-      + 1.16% vm_opt_aref (inlined)
-        0.51% str_duplicate
+         + 0.57% vm_call_iseq_setup_normal_0start_0params_0locals
+      + 1.15% vm_opt_aref (inlined)
+      + 0.56% rb_ary_new_from_values
+        0.55% str_duplicate
+      + 0.52% vm_opt_aset (inlined)
    + 19.78% _start
-+   84.22%     1.05%  ruby     ruby                [.] rb_vm_exec
-+   83.83%     0.00%  ruby     ruby                [.] rb_ec_exec_node
-+   83.36%     0.00%  ruby     ruby                [.] _start
-+   83.36%     0.00%  ruby     libc-2.27.so        [.] __libc_start_main
-+   83.36%     0.00%  ruby     ruby                [.] main
++   84.23%     0.93%  ruby     ruby                [.] rb_vm_exec
++   83.80%     0.00%  ruby     ruby                [.] rb_ec_exec_node
++   83.41%     0.00%  ruby     ruby                [.] _start
 
 
 $ PERF="record -c 10000 --call-graph dwarf" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v --jit-debug=-g1 --jit-save-temps bench.rb
-ruby 2.8.0dev (2020-03-14T09:17:17Z master 666194559f) +JIT [x86_64-linux]
+ruby 2.8.0dev (2020-03-15T04:13:31Z master 67fbc122fb) +JIT [x86_64-linux]
 warmup: 20000/20000
 benchmark: 20000/20000
-[ perf record: Woken up 1059 times to write data ]
+[ perf record: Woken up 1014 times to write data ]
 Warning:
-Processed 134988 events and lost 11 chunks!
+Processed 126579 events and lost 25 chunks!
 
 Check IO/CPU overload!
 
-[ perf record: Captured and wrote 830.695 MB perf.data (103282 samples) ]
-9730.67 rps
+[ perf record: Captured and wrote 792.909 MB perf.data (98601 samples) ]
+9727.10 rps
 
 $ sudo perf report
-Samples: 103K of event 'cycles:ppp', Event count (approx.): 1032820000
-  Children      Self  Command  Shared Object             Symbol
--   82.04%     1.41%  ruby     ruby                      [.] rb_vm_exec
-   - 80.65% rb_vm_exec
-      - 69.72% vm_exec_core
-         - 68.98% vm_sendish (inlined)
-            - 63.42% mjit_exec (inlined)
-               - 62.65% _mjit33
-                  - 62.48% _mjit34
-                     - 62.19% _mjit37
-                        - 61.80% _mjit39
-                           - 61.69% _mjit40
-                              - 61.44% rb_vm_exec
-                                 - mjit_exec (inlined)
-                                    - 61.44% _mjit41
-                                       - _mjit42
-                                          - 61.02% _mjit44
-                                             - 60.66% _mjit45
-                                                - 60.46% _mjit49
-                                                   - 55.50% _mjit56
-                                                      + 53.03% rb_vm_exec
-                                                      + 1.70% _mjit26
-                                                   - 4.41% vm_call_cfunc
-                                                      - 4.41% vm_call_cfunc_with_frame (inlined)
-                                                         + 4.39% rb_class_s_new
-               + 0.77% _mjit60
-            - 5.30% vm_call_cfunc
-               - 5.27% vm_call_cfunc_with_frame (inlined)
-                  + 3.37% rb_f_print
-                  + 1.35% rb_obj_dup
-      + 10.92% mjit_exec (inlined)
-   + 0.88% _start
-+   81.52%     7.26%  ruby     ruby                      [.] vm_exec_core
-+   80.65%     0.00%  ruby     ruby                      [.] vm_sendish (inlined)
+Samples: 98K of event 'cycles:ppp', Event count (approx.): 986010000
+  Children      Self  Command  Shared Object            Symbol
++   81.84%     1.39%  ruby     ruby                     [.] rb_vm_exec
+-   81.34%     7.59%  ruby     ruby                     [.] vm_exec_core
+   - 73.75% vm_exec_core
+      - 73.41% vm_sendish (inlined)
+         - 68.23% mjit_exec (inlined)
+            - 58.95% _mjit33_sinatra_base_rb_call
+               - 58.81% _mjit34_sinatra_base_rb_synchronize
+                  - 58.57% _mjit37_sinatra_base_rb_block_in_call
+                     - 58.19% _mjit39_sinatra_base_rb_call
+                        - 58.03% _mjit40_sinatra_base_rb_call
+                           - 57.79% rb_vm_exec
+                              - mjit_exec (inlined)
+                                 - _mjit41_sinatra_show_exceptions_rb_call
+                                    - 57.66% _mjit42_rack_method_override_rb_call
+                                       - 57.32% _mjit44_rack_head_rb_call
+                                          - 56.99% _mjit45_sinatra_base_rb_call
+                                             - 56.82% _mjit49_rack_logger_rb_call
+                                                - 52.18% _mjit56_rack_protection_frame_options_rb_call
+                                                   - 49.51% rb_vm_exec
+                                                      - vm_exec_core
+                                                         - 49.30% vm_sendish (inlined)
+                                                            - 48.44% mjit_exec (inlined)
+                                                               + 47.60% _mjit60_rack_protection_json_csrf_rb_call
+                                                               + 0.68% _mjit57_rack_protection_http_origin_rb_accepts_
+                                                   + 1.88% _mjit26_rack_protection_base_rb_html_
+                                                + 4.17% vm_call_cfunc
+            + 9.26% _mjit60_rack_protection_json_csrf_rb_call
+         - 5.05% vm_call_cfunc
+            - 5.03% vm_call_cfunc_with_frame (inlined)
+               + 3.23% rb_f_print
+               + 1.29% rb_obj_dup
+   + 6.09% _start
 ```
 
 ### stat
