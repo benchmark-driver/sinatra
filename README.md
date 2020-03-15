@@ -413,6 +413,8 @@ sudo perf script -i perf.data.old | stackcollapse-perf.pl | flamegraph.pl > flam
 sudo perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph-jit.svg
 ```
 
+See [benchmark-driver.github.io/sinatra](https://benchmark-driver.github.io/sinatra/)
+
 ### stat
 ```
 $ PERF="stat" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
