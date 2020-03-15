@@ -21,7 +21,7 @@ if defined?(RubyVM::MJIT) && RubyVM::MJIT.enabled?
   RubyVM::MJIT.pause
 end
 if defined?(RubyVM) && RubyVM.respond_to?(:reset_debug_counters)
-  RubyVM.respond_to?(:reset_debug_counters)
+  RubyVM.reset_debug_counters
 end
 
 # benchmark
