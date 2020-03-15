@@ -43,6 +43,10 @@ while i <= requests
   i += 1
 end
 puts
+
+if defined?(RubyVM) && RubyVM.respond_to?(:reset_debug_counters)
+  RubyVM.show_debug_counters
+end
 if use_perf
   Process.kill(:INT, pid)
   Process.wait(pid)
