@@ -404,6 +404,15 @@ Samples: 98K of event 'cycles:ppp', Event count (approx.): 986010000
    + 6.09% _start
 ```
 
+### report (flame graph)
+
+Set `$PATH` for [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph) and:
+
+```
+sudo perf script -i perf.data.old | stackcollapse-perf.pl | flamegraph.pl > flamegraph-vm.svg
+sudo perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph-jit.svg
+```
+
 ### stat
 ```
 $ PERF="stat" WARMUP=20000 REQUESTS=20000 sudo -E ~/.rbenv/versions/ruby/bin/ruby -v bench.rb
