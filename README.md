@@ -409,8 +409,8 @@ Samples: 98K of event 'cycles:ppp', Event count (approx.): 986010000
 Set `$PATH` for [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph) and:
 
 ```
-sudo perf script -i perf.data.old | stackcollapse-perf.pl | flamegraph.pl > flamegraph-vm.svg
-sudo perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph-jit.svg
+sudo perf script -i perf.data.old | stackcollapse-perf.pl | flamegraph.pl > docs/vm.svg
+sudo perf script | stackcollapse-perf.pl | flamegraph.pl > docs/jit.svg
 ```
 
 See [benchmark-driver.github.io/sinatra](https://benchmark-driver.github.io/sinatra/)
