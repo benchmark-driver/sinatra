@@ -19,7 +19,9 @@ end
 
 if defined?(RubyVM::MJIT) && RubyVM::MJIT.enabled?
   RubyVM::MJIT.pause
-  app.call(env.dup) # run cancel
+  app.call(env.dup) # issue recompile
+  RubyVM::MJIT.resume
+  RubyVM::MJIT.pause # finish recompile
 end
 if defined?(RubyVM) && RubyVM.respond_to?(:reset_debug_counters)
   RubyVM.reset_debug_counters
