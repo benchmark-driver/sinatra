@@ -1154,6 +1154,246 @@ benchmark: 20000/20000
 [RUBY_INSNS_COUNTER]    putobject_INT2FIX_1_                   83370 ( 0.1%)
 ```
 
+### MJIT\_COUNTEr
+
+```
+$ WARMUP=19998 REQUESTS=0 ~/.rbenv/versions/ruby/bin/ruby -v --jit-verbose=1 bench.rb
+ruby 2.8.0dev (2020-04-12T19:19:06Z master 82fdffc5ec) +JIT [x86_64-linux]
+JIT success (44.2ms): get_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:62 -> /tmp/_ruby_mjit_p25533u0.c
+JIT recompile: get_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:62
+JIT success (23.2ms): block in set@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1238 -> /tmp/_ruby_mjit_p25533u1.c
+JIT success (34.3ms): get_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:62 -> /tmp/_ruby_mjit_p25533u4.c
+JIT recompile: get_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:62
+JIT success (21.8ms): settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:934 -> /tmp/_ruby_mjit_p25533u2.c
+JIT success (44.8ms): get_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:62 -> /tmp/_ruby_mjit_p25533u7.c
+JIT inline: settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:939 => settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:934
+JIT success (44.0ms): settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:939 -> /tmp/_ruby_mjit_p25533u3.c
+JIT success (1107.5ms): []@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:452 -> /tmp/_ruby_mjit_p25533u5.c
+JIT recompile: []@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:452
+warmup: 19998/19998
+JIT success (1088.4ms): []=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:456 -> /tmp/_ruby_mjit_p25533u6.c
+JIT success (975.7ms): []@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:452 -> /tmp/_ruby_mjit_p25533u132.c
+JIT success (107.0ms): block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1822 -> /tmp/_ruby_mjit_p25533u8.c
+JIT success (129.6ms): filter!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:976 -> /tmp/_ruby_mjit_p25533u9.c
+JIT success (45.5ms): block in content_type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:346 -> /tmp/_ruby_mjit_p25533u10.c
+JIT success (201.5ms): invoke@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1071 -> /tmp/_ruby_mjit_p25533u11.c
+JIT success (312.0ms): block in invoke@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1072 -> /tmp/_ruby_mjit_p25533u12.c
+JIT success (88.0ms): query_string@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:158 -> /tmp/_ruby_mjit_p25533u13.c
+JIT success (74.2ms): request_method@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:157 -> /tmp/_ruby_mjit_p25533u14.c
+JIT success (182.0ms): body@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:254 -> /tmp/_ruby_mjit_p25533u15.c
+JIT success (253.9ms): level=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:250 -> /tmp/_ruby_mjit_p25533u16.c
+JIT success (75.3ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:45 -> /tmp/_ruby_mjit_p25533u17.c
+JIT success (940.2ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:26 -> /tmp/_ruby_mjit_p25533u18.c
+JIT success (921.3ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:50 -> /tmp/_ruby_mjit_p25533u19.c
+JIT success (32.4ms): set_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:78 -> /tmp/_ruby_mjit_p25533u20.c
+JIT success (92.1ms): media_type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:383 -> /tmp/_ruby_mjit_p25533u21.c
+JIT success (59.4ms): content_type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:271 -> /tmp/_ruby_mjit_p25533u22.c
+JIT success (118.3ms): type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/media_type.rb:16 -> /tmp/_ruby_mjit_p25533u23.c
+JIT success (86.7ms): block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1828 -> /tmp/_ruby_mjit_p25533u24.c
+JIT success (50.1ms): set_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/response.rb:128 -> /tmp/_ruby_mjit_p25533u25.c
+JIT success (78.7ms): drop_body?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:182 -> /tmp/_ruby_mjit_p25533u26.c
+JIT success (111.5ms): html?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:120 -> /tmp/_ruby_mjit_p25533u27.c
+JIT success (947.8ms): each@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:440 -> /tmp/_ruby_mjit_p25533u28.c
+JIT success (322.9ms): block in each@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:441 -> /tmp/_ruby_mjit_p25533u29.c
+JIT success (55.5ms): block in html?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:121 -> /tmp/_ruby_mjit_p25533u30.c
+JIT success (76.1ms): []@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:414 -> /tmp/_ruby_mjit_p25533u31.c
+JIT success (19.9ms): environment@(eval):1 -> /tmp/_ruby_mjit_p25533u32.c
+JIT inline: development?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1420 => environment@(eval):1
+JIT success (36.8ms): development?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1420 -> /tmp/_ruby_mjit_p25533u33.c
+JIT success (81.9ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1502 -> /tmp/_ruby_mjit_p25533u34.c
+JIT success (376.3ms): synchronize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1726 -> /tmp/_ruby_mjit_p25533u35.c
+JIT inline: lock?@(eval):1 => lock@(eval):1
+JIT success (45.5ms): lock?@(eval):1 -> /tmp/_ruby_mjit_p25533u36.c
+JIT success (19.2ms): lock@(eval):1 -> /tmp/_ruby_mjit_p25533u37.c
+JIT success (44.8ms): block in call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1503 -> /tmp/_ruby_mjit_p25533u38.c
+JIT success (73.3ms): prototype@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1477 -> /tmp/_ruby_mjit_p25533u39.c
+JIT success (42.3ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1950 -> /tmp/_ruby_mjit_p25533u40.c
+JIT success (122.3ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:193 -> /tmp/_ruby_mjit_p25533u41.c
+JIT success (41.5ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/show_exceptions.rb:21 -> /tmp/_ruby_mjit_p25533u42.c
+JIT success (193.3ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/method_override.rb:15 -> /tmp/_ruby_mjit_p25533u43.c
+JIT success (52.4ms): allowed_methods@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/method_override.rb:40 -> /tmp/_ruby_mjit_p25533u44.c
+JIT success (217.4ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/head.rb:11 -> /tmp/_ruby_mjit_p25533u45.c
+JIT success (948.3ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:223 -> /tmp/_ruby_mjit_p25533u46.c
+JIT success (39.4ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:229 -> /tmp/_ruby_mjit_p25533u47.c
+JIT success (208.2ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/common_logger.rb:36 -> /tmp/_ruby_mjit_p25533u48.c
+JIT success (88.8ms): clock_time@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:83 -> /tmp/_ruby_mjit_p25533u49.c
+JIT success (138.5ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/logger.rb:12 -> /tmp/_ruby_mjit_p25533u50.c
+JIT success (164.4ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:379 -> /tmp/_ruby_mjit_p25533u51.c
+JIT success (33.6ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger/formatter.rb:10 -> /tmp/_ruby_mjit_p25533u52.c
+JIT success (41.7ms): datetime_format=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:279 -> /tmp/_ruby_mjit_p25533u53.c
+JIT success (200.3ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger/log_device.rb:14 -> /tmp/_ruby_mjit_p25533u54.c
+JIT success (144.1ms): mon_initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/monitor.rb:230 -> /tmp/_ruby_mjit_p25533u55.c
+JIT success (110.1ms): set_dev@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger/log_device.rb:79 -> /tmp/_ruby_mjit_p25533u56.c
+JIT success (105.9ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/frame_options.rb:30 -> /tmp/_ruby_mjit_p25533u57.c
+JIT success (106.7ms): accepts?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/http_origin.rb:30 -> /tmp/_ruby_mjit_p25533u58.c
+JIT success (39.6ms): safe?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:37 -> /tmp/_ruby_mjit_p25533u59.c
+JIT success (77.3ms): accepts?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/ip_spoofing.rb:14 -> /tmp/_ruby_mjit_p25533u60.c
+JIT success (125.4ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/json_csrf.rb:24 -> /tmp/_ruby_mjit_p25533u61.c
+JIT success (85.0ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/path_traversal.rb:13 -> /tmp/_ruby_mjit_p25533u62.c
+JIT success (137.4ms): cleanup@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/path_traversal.rb:21 -> /tmp/_ruby_mjit_p25533u63.c
+JIT success (137.8ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/xss_header.rb:17 -> /tmp/_ruby_mjit_p25533u64.c
+JIT success (49.4ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:907 -> /tmp/_ruby_mjit_p25533u65.c
+JIT success (253.3ms): call!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:911 -> /tmp/_ruby_mjit_p25533u66.c
+JIT success (945.0ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/indifferent_hash.rb:51 -> /tmp/_ruby_mjit_p25533u67.c
+JIT success (961.3ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:136 -> /tmp/_ruby_mjit_p25533u68.c
+JIT success (469.7ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/response.rb:42 -> /tmp/_ruby_mjit_p25533u69.c
+JIT success (964.9ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:422 -> /tmp/_ruby_mjit_p25533u70.c
+JIT success (36.1ms): block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1824 -> /tmp/_ruby_mjit_p25533u71.c
+JIT success (30.2ms): clear@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/tilt-2.0.10/lib/tilt.rb:109 -> /tmp/_ruby_mjit_p25533u72.c
+JIT success (32.6ms): block in call!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:919 -> /tmp/_ruby_mjit_p25533u73.c
+JIT success (119.4ms): dispatch!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1087 -> /tmp/_ruby_mjit_p25533u74.c
+JIT success (975.5ms): params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:78 -> /tmp/_ruby_mjit_p25533u75.c
+JIT success (973.5ms): params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:31 -> /tmp/_ruby_mjit_p25533u76.c
+JIT success (55.4ms): params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:468 -> /tmp/_ruby_mjit_p25533u77.c
+JIT success (182.2ms): GET@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:426 -> /tmp/_ruby_mjit_p25533u78.c
+JIT success (51.2ms): parse_query@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:589 -> /tmp/_ruby_mjit_p25533u79.c
+JIT success (68.0ms): query_parser@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:585 -> /tmp/_ruby_mjit_p25533u80.c
+JIT success (209.4ms): parse_nested_query@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:64 -> /tmp/_ruby_mjit_p25533u81.c
+JIT success (41.3ms): make_params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:124 -> /tmp/_ruby_mjit_p25533u82.c
+JIT success (39.7ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:159 -> /tmp/_ruby_mjit_p25533u83.c
+JIT success (90.7ms): to_h@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:197 -> /tmp/_ruby_mjit_p25533u84.c
+JIT success (268.7ms): POST@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:440 -> /tmp/_ruby_mjit_p25533u85.c
+JIT success (187.5ms): form_data?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:412 -> /tmp/_ruby_mjit_p25533u86.c
+JIT success (83.3ms): parseable_data?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:421 -> /tmp/_ruby_mjit_p25533u87.c
+JIT success (83.5ms): merge!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/indifferent_hash.rb:135 -> /tmp/_ruby_mjit_p25533u88.c
+JIT success (950.5ms): block in merge!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/indifferent_hash.rb:136 -> /tmp/_ruby_mjit_p25533u89.c
+JIT success (67.0ms): block in dispatch!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1095 -> /tmp/_ruby_mjit_p25533u90.c
+JIT success (50.3ms): static?@(eval):1 -> /tmp/_ruby_mjit_p25533u91.c
+JIT success (83.1ms): block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1829 -> /tmp/_ruby_mjit_p25533u92.c
+JIT success (144.0ms): route!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:982 -> /tmp/_ruby_mjit_p25533u93.c
+JIT success (89.8ms): block in route!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:984 -> /tmp/_ruby_mjit_p25533u94.c
+JIT success (381.7ms): process_route@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1014 -> /tmp/_ruby_mjit_p25533u95.c
+JIT success (87.1ms): path_info@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:154 -> /tmp/_ruby_mjit_p25533u96.c
+JIT inline: strict_paths?@(eval):1 => strict_paths@(eval):1
+JIT success (46.2ms): strict_paths?@(eval):1 -> /tmp/_ruby_mjit_p25533u97.c
+JIT success (19.9ms): strict_paths@(eval):1 -> /tmp/_ruby_mjit_p25533u98.c
+JIT success (137.8ms): params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/mustermann-1.1.1/lib/mustermann/pattern.rb:204 -> /tmp/_ruby_mjit_p25533u99.c
+JIT success (171.5ms): match@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/forwardable.rb:226 -> /tmp/_ruby_mjit_p25533u100.c
+JIT success (174.1ms): named_captures@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/forwardable.rb:226 -> /tmp/_ruby_mjit_p25533u101.c
+JIT compaction (17.8ms): Compacted 100 methods -> /tmp/_ruby_mjit_p25533u133.so
+JIT recompile: level=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:250
+JIT recompile: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger/log_device.rb:14
+JIT recompile: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:45
+JIT recompile: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:50
+JIT recompile: call!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:911
+JIT recompile: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/response.rb:42
+JIT recompile: []=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:456
+JIT success (1021.2ms): []=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:456 -> /tmp/_ruby_mjit_p25533u140.c
+JIT success (271.4ms): level=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:250 -> /tmp/_ruby_mjit_p25533u134.c
+JIT success (57.2ms): call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:45 -> /tmp/_ruby_mjit_p25533u136.c
+JIT success (937.3ms): initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:50 -> /tmp/_ruby_mjit_p25533u137.c
+JIT success (48.9ms): force_encoding@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1761 -> /tmp/_ruby_mjit_p25533u102.c
+JIT inline: force_encoding@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1749 => settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:934
+JIT success (151.3ms): force_encoding@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1749 -> /tmp/_ruby_mjit_p25533u103.c
+JIT success (959.9ms): respond_to?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/mustermann-1.1.1/lib/mustermann/pattern.rb:353 -> /tmp/_ruby_mjit_p25533u104.c
+JIT compaction (18.0ms): Compacted 100 methods -> /tmp/_ruby_mjit_p25533u141.so
+
+NaN rps
+[MJIT_COUNTER] total_calls of active_units:
+  320000: get_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:62
+  220012: block in set@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1238
+  200000: settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:939
+  160000: []@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:452
+  140000: []=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:456
+   80000: filter!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:976
+   80000: block in content_type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:346
+   80000: block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1822
+   60000: request_method@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:157
+   60000: query_string@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:158
+   60000: invoke@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1071
+   60000: body@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:254
+   60000: block in invoke@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1072
+   46990: settings@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:934
+   40000: type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/media_type.rb:16
+   40000: set_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/response.rb:128
+   40000: set_header@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:78
+   40000: media_type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:383
+   40000: level=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:250
+   40000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:50
+   40000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:26
+   40000: html?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:120
+   40000: each@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:440
+   40000: drop_body?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:182
+   40000: content_type@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:271
+   40000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:45
+   40000: block in html?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:121
+   40000: block in each@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:441
+   40000: block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1828
+   40000: []@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:414
+   20002: environment@(eval):1
+   20001: development?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1420
+   20000: to_h@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:197
+   20000: synchronize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1726
+   20000: strict_paths?@(eval):1
+   20000: static?@(eval):1
+   20000: set_dev@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger/log_device.rb:79
+   20000: safe?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/base.rb:37
+   20000: route!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:982
+   20000: respond_to?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/mustermann-1.1.1/lib/mustermann/pattern.rb:353
+   20000: query_parser@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:585
+   20000: prototype@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1477
+   20000: process_route@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1014
+   20000: path_info@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:154
+   20000: parseable_data?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:421
+   20000: parse_query@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:589
+   20000: parse_nested_query@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:64
+   20000: params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:78
+   20000: params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:468
+   20000: params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:31
+   20000: params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/mustermann-1.1.1/lib/mustermann/pattern.rb:204
+   20000: named_captures@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/forwardable.rb:226
+   20000: mon_initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/monitor.rb:230
+   20000: merge!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/indifferent_hash.rb:135
+   20000: match@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/forwardable.rb:226
+   20000: make_params@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:124
+   20000: lock?@(eval):1
+   20000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/indifferent_hash.rb:51
+   20000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:136
+   20000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:422
+   20000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/query_parser.rb:159
+   20000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger/formatter.rb:10
+   20000: initialize@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:379
+   20000: form_data?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:412
+   20000: force_encoding@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1761
+   20000: force_encoding@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1749
+   20000: dispatch!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1087
+   20000: datetime_format=@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/2.8.0/logger.rb:279
+   20000: clock_time@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/utils.rb:83
+   20000: clear@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/tilt-2.0.10/lib/tilt.rb:109
+   20000: cleanup@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/path_traversal.rb:21
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/show_exceptions.rb:21
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:907
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:229
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:223
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1950
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:193
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1502
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/xss_header.rb:17
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/path_traversal.rb:13
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/json_csrf.rb:24
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/frame_options.rb:30
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/method_override.rb:15
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/logger.rb:12
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/head.rb:11
+   20000: call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/common_logger.rb:36
+   20000: block in route!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:984
+   20000: block in merge!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/indifferent_hash.rb:136
+   20000: block in dispatch!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1095
+   20000: block in call@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1503
+   20000: block in call!@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:919
+   20000: block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1829
+   20000: block in <class:Base>@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1824
+   20000: allowed_methods@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/method_override.rb:40
+   20000: accepts?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/ip_spoofing.rb:14
+   20000: accepts?@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-protection-2.0.8.1/lib/rack/protection/http_origin.rb:30
+   20000: POST@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:440
+   20000: GET@/home/k0kubun/.rbenv/versions/ruby/lib/ruby/gems/2.8.0/gems/rack-2.2.2/lib/rack/request.rb:426
+   19998: strict_paths@(eval):1
+   19998: lock@(eval):1
+```
+
+(The last output is manually sorted by counts)
+
 ## benchmark-driver
 
 ```
