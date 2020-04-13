@@ -1,2 +1,3 @@
 /*.dump
 /perf.data*
+/trace_location-*.md
