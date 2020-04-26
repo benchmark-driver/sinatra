@@ -26,15 +26,19 @@ if defined?(RubyVM::MJIT) && RubyVM::MJIT.enabled?
   RubyVM::MJIT.resume
   RubyVM::MJIT.pause # finish recompile
 end
-if defined?(RubyVM) && RubyVM.respond_to?(:reset_debug_counters)
-  RubyVM.reset_debug_counters
-end
 
 # benchmark
-if use_perf = ENV.key?('PERF')
-  require 'shellwords'
-  pid = Process.spawn('perf', *ENV['PERF'].shellsplit, '-p', Process.pid.to_s)
-end
+Process.spawn(
+  '/home/k0kubun/intel/vtune_profiler/bin64/vtune', '-collect',
+
+  #'hotspots', '-run-pass-thru=--no-altstack',
+  'hotspots', '-knob', 'sampling-mode=hw',
+  #'uarch-exploration',
+  #'memory-access',
+
+  "-user-data-dir=/home/k0kubun/intel/vtune/projects/sinatra-#{RubyVM::MJIT.enabled? ? 'jit' : 'vm'}",
+  "-target-pid=#{Process.pid}",
+)
 i = 1
 time = 0.0
 while i <= requests
@@ -48,14 +52,6 @@ while i <= requests
   i += 1
 end
 puts
-
-if defined?(RubyVM) && RubyVM.respond_to?(:reset_debug_counters)
-  RubyVM.show_debug_counters
-end
-if use_perf
-  Process.kill(:INT, pid)
-  Process.wait(pid)
-end
 
 # print result
 puts "#{"%.2f" % (requests.to_f / time)} rps"
