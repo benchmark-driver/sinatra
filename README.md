@@ -1154,7 +1154,7 @@ benchmark: 20000/20000
 [RUBY_INSNS_COUNTER]    putobject_INT2FIX_1_                   83370 ( 0.1%)
 ```
 
-### MJIT\_COUNTEr
+### MJIT\_COUNTER
 
 ```
 $ WARMUP=19998 REQUESTS=0 ~/.rbenv/versions/ruby/bin/ruby -v --jit-verbose=1 bench.rb
