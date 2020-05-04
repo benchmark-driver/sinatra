@@ -33,7 +33,7 @@ Process.spawn(
 
   #'hotspots', '-run-pass-thru=--no-altstack',
   'hotspots', '-knob', 'sampling-mode=hw',
-  #'uarch-exploration',
+  #'uarch-exploration', '-knob', 'sampling-interval=0.5',
   #'memory-access',
 
   "-user-data-dir=/home/k0kubun/intel/vtune/projects/sinatra-#{RubyVM::MJIT.enabled? ? 'jit' : 'vm'}",
