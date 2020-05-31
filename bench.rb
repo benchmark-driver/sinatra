@@ -38,9 +38,9 @@ end
 i = 1
 time = 0.0
 while i <= requests
-  env = env.dup
+  dup_env = env.dup
   before = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  app.call(env)
+  app.call(dup_env)
   after = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
   time += after - before
